@@ -39,7 +39,7 @@ function uniqueData() {
       branches,
       subjects,
       educationalPrograms,
-      Array.from(specialties.values()).sort(),
+      specialties,
       offerTypes
   )
 }
@@ -72,7 +72,7 @@ function filterFunction(fd, id, value, pr) {
 
   if (id === 'branch')
     res = fd.filter(university =>
-        university.specialties.some(spec => (spec.branch)? spec.branch.search(value) > -1 : false)
+        university.specialties.some(spec => spec.branch === value)
     )
   if (id === 'educational-program')
     res = fd.filter(university =>
@@ -104,7 +104,7 @@ function filterFunction(fd, id, value, pr) {
       id === 'subject3')
     res = fd.filter(university =>
         university.specialties.some(spec =>
-            spec.subjects.some(sub => sub.subject === value && +sub.k > 0)
+            spec.subjects.some(sub => sub.subject.search(value) > -1 && +sub.k > 0)//=== value && +sub.k > 0)
         )
     )
 
